@@ -1,0 +1,17 @@
+public static T RetryFunction<T>(Func<T> func, int retryCount)
+        {
+            while (retryCount > 0)
+            {
+                try
+                {
+                    return func();
+                }
+                catch (Exception e)
+                {
+                    if (--retryCount <= 0)
+                        throw;
+                }
+            }
+
+            return default(T);
+        }
